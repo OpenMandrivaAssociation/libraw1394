@@ -1,24 +1,30 @@
 %define	name	libraw1394
-%define	version	1.2.1
-%define	release	%mkrel 1
+%define	version	1.2.2
+%define svn	172
+%if %svn
+%define	release	%mkrel 0.%svn.1
+%else
+%define release	%mkrel 1
+%endif
 
-%define	major	8
-%define	libname	%mklibname raw1394_ %{major}
-%define	libnamedev %{libname}-devel
+%define	major		8
+%define	libname		%mklibname raw1394_ %{major}
+%define	develname	%mklibname raw1394 -d
+%define staticname	%mklibname raw1394 -d -s
 
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-License:	GPL
+License:	LGPLv2.1
 Group:		System/Libraries
-Source0:	http://download.sourceforge.net/libraw1394/%{name}-%{version}-svn160.tar.bz2
-# required for freebob support (austin)
-Patch0:		libraw1394-svn160-freebob_iso_again.patch.bz2
+%if %svn
+Source0:	%{name}-%{svn}.tar.bz2
+%else
+Source0:	http://download.sourceforge.net/libraw1394/%{name}-%{version}.tar.bz2
+%endif
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://www.linux1394.org/
 Summary:	FireWire interface
-Summary(pt_BR):	FireWire interface
-Summary(es):	FireWire interface
 Requires(post): coreutils
 Requires(post): ldconfig
 Requires(postun): ldconfig
@@ -64,7 +70,7 @@ match the kernel version (instead of all applications).
 This package contains the shared library to run applications linked
 with %{name}.
 
-%package -n	%{libnamedev}
+%package -n	%{develname}
 Summary:	Development and include files for libraw1394
 Summary(pt_BR):	Arquivos de desenvolvimento e cabe?alhos para o libraw1394
 Summary(es):	Development and include files for libraw1394
@@ -73,8 +79,9 @@ Group(pt_BR):	Desenvolvimento
 Group(es):	Desarrollo
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
+Obsoletes:	%{mklibname raw1394_8 -d}
 
-%description -n	%{libnamedev}
+%description -n	%{develname}
 libraw1394 is the only supported interface to the kernel side raw1394 of
 the Linux IEEE-1394 subsystem, which provides direct access to the connected
 1394 buses to user space.  Through libraw1394/raw1394, applications can
@@ -84,16 +91,17 @@ for the protocol in question.
 This archive contains the header-files for libraw1394 development.
 
 
-%package -n	%{libname}-static-devel
+%package -n	%{staticname}
 Summary:	Development components for libraw1394
 Summary(pt_BR):	Componentes est?ticos de desenvolvimento para o libraw1394
 Summary(es):	Development components for libraw1394
 Group:		Development/C
 Group(pt_BR):	Desenvolvimento
 Group(es):	Desarrollo
-Requires:	%{libname}-devel = %{version}-%{release}
+Requires:	%{develname} = %{version}-%{release}
+Obsoletes:	%{mklibname raw1394_8 -d -s}
 
-%description -n	%{libname}-static-devel
+%description -n	%{staticname}
 libraw1394 is the only supported interface to the kernel side raw1394 of
 the Linux IEEE-1394 subsystem, which provides direct access to the connected
 1394 buses to user space.  Through libraw1394/raw1394, applications can
@@ -105,10 +113,11 @@ This archive contains the static libraries (.a)
 
 %prep
 %setup -q -n %name
-%patch0
 
 %build
+%if %svn
 ./autogen.sh
+%endif
 %configure2_5x
 %make
 
@@ -116,22 +125,7 @@ This archive contains the static libraries (.a)
 rm -rf %{buildroot}
 %{makeinstall_std}
 
-%post -n %libname
-/sbin/ldconfig
-if [ $1 -eq 1 -a ! -e /dev/raw1394 ] 
-then 
-mknod -m 600 /dev/raw1394 c 171 0
-chown root.root /dev/raw1394
-echo
-echo "/dev/raw1394 created"
-echo "It is owned by root with permissions 600.  You may want to fix"
-echo "the group/permission to something appropriate for you."
-echo "Note however that anyone who can open raw1394 can access all"
-echo "devices on all connected 1394 buses unrestricted, including"
-echo "harddisks and other probably sensitive devices."
-echo
-fi
-
+%post -n %{libname} -p /sbin/ldconfig
 
 %postun -n %{libname} -p /sbin/ldconfig
 
@@ -146,17 +140,16 @@ rm -rf %{buildroot}
 
 %files -n %{libname}
 %defattr(-,root,root)
-%{_libdir}/libraw1394.so.%{major}.*
-%{_libdir}/libraw1394.so.%{major}
+%{_libdir}/libraw1394.so.%{major}*
 
-%files -n %{libnamedev}
+%files -n %{develname}
 %defattr(-,root,root)
-%doc README NEWS INSTALL COPYING.LIB AUTHORS
+%doc README NEWS AUTHORS
 %{_includedir}/libraw1394
 %{_libdir}/libraw1394.so
 %{_libdir}/libraw1394.la
 %{_libdir}/pkgconfig/%{name}.pc
 
-%files -n %{libname}-static-devel
+%files -n %{staticname}
 %defattr(-,root,root)
 %{_libdir}/libraw1394.a
