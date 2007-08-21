@@ -26,8 +26,6 @@ Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://www.linux1394.org/
 Summary:	FireWire interface
 Requires(post): coreutils
-Requires(post): ldconfig
-Requires(postun): ldconfig
 
 %description
 libraw1394 is the only supported interface to the kernel side raw1394 of
