@@ -2,7 +2,7 @@
 %define	version	1.2.2
 %define svn	172
 %if %svn
-%define	release	%mkrel 0.%svn.1
+%define	release	%mkrel 0.%svn.2
 %else
 %define release	%mkrel 1
 %endif
@@ -15,7 +15,7 @@
 Name:		%{name}
 Version:	%{version}
 Release:	%{release}
-License:	LGPLv2.1
+License:	LGPLv2+
 Group:		System/Libraries
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
