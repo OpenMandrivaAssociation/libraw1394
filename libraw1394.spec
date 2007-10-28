@@ -1,10 +1,11 @@
 %define	name	libraw1394
-%define	version	1.2.2
-%define svn	172
+%define	version	1.3.0
+%define rel	1
+%define svn	0
 %if %svn
-%define	release	%mkrel 0.%svn.2
+%define	release	%mkrel 0.%svn.%rel
 %else
-%define release	%mkrel 1
+%define release	%mkrel %rel
 %endif
 
 %define	major		8
@@ -20,7 +21,7 @@ Group:		System/Libraries
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
 %else
-Source0:	http://download.sourceforge.net/libraw1394/%{name}-%{version}.tar.bz2
+Source0:	http://www.linux1394.org/dl/%{name}-%{version}.tar.gz
 %endif
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://www.linux1394.org/
@@ -110,7 +111,11 @@ This archive contains the static libraries (.a)
 
 
 %prep
+%if %svn
 %setup -q -n %name
+%else
+%setup -q -n %name-%version
+%endif
 
 %build
 %if %svn
