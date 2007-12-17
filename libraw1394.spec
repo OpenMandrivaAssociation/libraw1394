@@ -23,7 +23,6 @@ Source0:	%{name}-%{svn}.tar.bz2
 %else
 Source0:	http://www.linux1394.org/dl/%{name}-%{version}.tar.gz
 %endif
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://www.linux1394.org/
 Summary:	FireWire interface
 Requires(post): coreutils
