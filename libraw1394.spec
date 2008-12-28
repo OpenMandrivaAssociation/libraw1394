@@ -1,6 +1,6 @@
 %define	name	libraw1394
-%define	version	1.3.0
-%define rel	2
+%define	version	2.0.0
+%define rel	1
 %define svn	0
 %if %svn
 %define	release	%mkrel 0.%svn.%rel
@@ -8,7 +8,7 @@
 %define release	%mkrel %rel
 %endif
 
-%define	major		8
+%define	major		11
 %define	libname		%mklibname raw1394_ %{major}
 %define	develname	%mklibname raw1394 -d
 %define staticname	%mklibname raw1394 -d -s
