@@ -1,6 +1,6 @@
 %define	name	libraw1394
 %define	version	2.0.0
-%define rel	1
+%define rel	2
 %define svn	0
 %if %svn
 %define	release	%mkrel 0.%svn.%rel
@@ -78,7 +78,7 @@ Group(pt_BR):	Desenvolvimento
 Group(es):	Desarrollo
 Requires:	%{libname} = %{version}-%{release}
 Provides:	%{name}-devel = %{version}-%{release}
-Obsoletes:	%{mklibname raw1394_8 -d}
+Conflicts:	%{mklibname raw1394_8 -d}
 
 %description -n	%{develname}
 libraw1394 is the only supported interface to the kernel side raw1394 of
@@ -98,7 +98,7 @@ Group:		Development/C
 Group(pt_BR):	Desenvolvimento
 Group(es):	Desarrollo
 Requires:	%{develname} = %{version}-%{release}
-Obsoletes:	%{mklibname raw1394_8 -d -s}
+Conflicts:	%{mklibname raw1394_8 -d -s}
 
 %description -n	%{staticname}
 libraw1394 is the only supported interface to the kernel side raw1394 of
