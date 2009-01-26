@@ -1,6 +1,6 @@
 %define	name	libraw1394
-%define	version	2.0.0
-%define rel	2
+%define	version	2.0.1
+%define rel	1
 %define svn	0
 %if %svn
 %define	release	%mkrel 0.%svn.%rel
