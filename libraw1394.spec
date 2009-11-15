@@ -1,6 +1,6 @@
 %define	name	libraw1394
-%define	version	2.0.2
-%define rel	2
+%define	version	2.0.4
+%define rel	1
 %define svn	0
 %if %svn
 %define	release	%mkrel 0.%svn.%rel
@@ -21,10 +21,10 @@ Group:		System/Libraries
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
 %else
-Source0:	http://www.linux1394.org/dl/%{name}-%{version}.tar.gz
+Source0:	http://dfn.dl.sourceforge.net/project/libraw1394/libraw1394/%{name}-%{version}.tar.gz
 %endif
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
-URL:		http://www.linux1394.org/
+URL:		http://sourceforge.net/projects/libraw1394/
 Summary:	FireWire interface
 Requires(post): coreutils
 
