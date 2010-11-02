@@ -1,5 +1,5 @@
 %define	name	libraw1394
-%define	version	2.0.5
+%define	version	2.0.6
 %define rel	1
 %define svn	0
 %if %svn
@@ -21,7 +21,7 @@ Group:		System/Libraries
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
 %else
-Source0:	http://dfn.dl.sourceforge.net/project/libraw1394/libraw1394/%{name}-%{version}.tar.gz
+Source0:	http://dfn.dl.sourceforge.net/project/libraw1394/libraw1394/%{name}-%{version}.tar.bz2
 %endif
 Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://sourceforge.net/projects/libraw1394/
