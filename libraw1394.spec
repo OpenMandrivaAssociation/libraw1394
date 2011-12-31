@@ -1,6 +1,6 @@
 %define	name	libraw1394
 %define	version	2.0.6
-%define rel	2
+%define rel	3
 %define svn	0
 %if %svn
 %define	release	%mkrel 0.%svn.%rel
@@ -121,20 +121,12 @@ This archive contains the static libraries (.a)
 %if %svn
 ./autogen.sh
 %endif
-%configure2_5x
+%configure2_5x --disable-static
 %make
 
 %install
 rm -rf %{buildroot}
 %{makeinstall_std}
-
-%if %mdkversion < 200900
-%post -n %{libname} -p /sbin/ldconfig
-%endif
-
-%if %mdkversion < 200900
-%postun -n %{libname} -p /sbin/ldconfig
-%endif
 
 %clean
 rm -rf %{buildroot}
@@ -154,9 +146,7 @@ rm -rf %{buildroot}
 %doc README NEWS AUTHORS
 %{_includedir}/libraw1394
 %{_libdir}/libraw1394.so
-%{_libdir}/libraw1394.la
 %{_libdir}/pkgconfig/%{name}.pc
 
 %files -n %{staticname}
 %defattr(-,root,root)
-%{_libdir}/libraw1394.a
