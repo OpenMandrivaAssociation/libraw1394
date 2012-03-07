@@ -1,11 +1,11 @@
 %define	name	libraw1394
-%define	version	2.0.6
-%define rel	4
+%define	version	2.0.8
+%define rel	1
 %define svn	0
 %if %svn
-%define	release	%mkrel 0.%svn.%rel
+%define	release	0.%svn.%rel
 %else
-%define release	%mkrel %rel
+%define release	%rel
 %endif
 
 %define	major		11
@@ -21,9 +21,8 @@ Group:		System/Libraries
 %if %svn
 Source0:	%{name}-%{svn}.tar.bz2
 %else
-Source0:	http://dfn.dl.sourceforge.net/project/libraw1394/libraw1394/%{name}-%{version}.tar.bz2
+Source0:	http://dfn.dl.sourceforge.net/project/libraw1394/libraw1394/%{name}-%{version}.tar.xz
 %endif
-Buildroot:	%{_tmppath}/%{name}-%{version}-%{release}-buildroot
 URL:		http://sourceforge.net/projects/libraw1394/
 Summary:	FireWire interface
 Requires(post): coreutils
@@ -125,28 +124,20 @@ This archive contains the static libraries (.a)
 %make
 
 %install
-rm -rf %{buildroot}
 %{makeinstall_std}
 
-%clean
-rm -rf %{buildroot}
-
 %files -n %name-utils
-%defattr(-,root,root)
 %doc README AUTHORS
 %{_bindir}/*
 %{_mandir}/man*/*
 
 %files -n %{libname}
-%defattr(-,root,root)
 %{_libdir}/libraw1394.so.%{major}*
 
 %files -n %{develname}
-%defattr(-,root,root)
 %doc README NEWS AUTHORS
 %{_includedir}/libraw1394
 %{_libdir}/libraw1394.so
 %{_libdir}/pkgconfig/%{name}.pc
 
 %files -n %{staticname}
-%defattr(-,root,root)
