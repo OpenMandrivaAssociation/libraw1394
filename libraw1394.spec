@@ -3,13 +3,13 @@
 %define	develname	%mklibname raw1394 -d
 
 Name:		libraw1394
-Version:	2.0.8
-Release:	2
+Version:	2.1.0
+Release:	1
 Summary:	FireWire interface
 License:	LGPLv2+
 Group:		System/Libraries
 URL:		http://sourceforge.net/projects/libraw1394/
-Source0:	http://dfn.dl.sourceforge.net/project/libraw1394/libraw1394/%{name}-%{version}.tar.xz
+Source0:	http://www.kernel.org/pub/linux/libs/ieee1394/%{name}-%{version}.tar.xz
 Requires(post):	coreutils
 
 %description
