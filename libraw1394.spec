@@ -4,8 +4,8 @@
 
 Summary:	FireWire interface
 Name:		libraw1394
-Version:	2.1.0
-Release:	15
+Version:	2.1.2
+Release:	1
 License:	LGPLv2+
 Group:		System/Libraries
 Url:		http://sourceforge.net/projects/libraw1394/
