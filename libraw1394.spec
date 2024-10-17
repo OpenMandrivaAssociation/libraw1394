@@ -8,7 +8,7 @@ Version:	2.1.2
 Release:	4
 License:	LGPLv2+
 Group:		System/Libraries
-Url:		http://sourceforge.net/projects/libraw1394/
+Url:		https://sourceforge.net/projects/libraw1394/
 Source0:	http://www.kernel.org/pub/linux/libs/ieee1394/%{name}-%{version}.tar.xz
 Requires(post):	coreutils
 
