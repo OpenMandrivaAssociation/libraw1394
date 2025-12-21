@@ -12,6 +12,11 @@ Url:		https://sourceforge.net/projects/libraw1394/
 Source0:	http://www.kernel.org/pub/linux/libs/ieee1394/%{name}-%{version}.tar.xz
 Requires(post):	coreutils
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 %description
 libraw1394 is the only supported interface to the kernel side raw1394 of
 the Linux IEEE-1394 subsystem, which provides direct access to the connected
